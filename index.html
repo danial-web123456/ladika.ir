@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>لادیکا | تولیدکننده بلوک سبک سیمانی</title>
+
+    <style>
+        :root {
+            --orange: #ff8c00;
+            --light-orange: #ffb13b;
+            --dark-orange: #d86f00;
+            --black: #090909;
+            --white: #ffffff;
+            --red: #d90000;
+            --glass: rgba(255, 255, 255, 0.24);
+            --shadow: 10px 10px 0 var(--black);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--black);
+            background:
+                radial-gradient(circle at 10% 10%, rgba(255,255,255,.25), transparent 25%),
+                linear-gradient(135deg, var(--orange), var(--light-orange));
+            font-family: "B Nazanin", "BNazanin", Tahoma, sans-serif;
+            font-size: 21px;
+            line-height: 2;
+        }
+
+        a {
+            color: var(--black);
+        }
+
+        .page-pattern {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: .08;
+            pointer-events: none;
+            background-image:
+                linear-gradient(30deg, #000 12%, transparent 12.5%, transparent 87%, #000 87.5%, #000),
+                linear-gradient(150deg, #000 12%, transparent 12.5%, transparent 87%, #000 87.5%, #000),
+                linear-gradient(30deg, #000 12%, transparent 12.5%, transparent 87%, #000 87.5%, #000),
+                linear-gradient(150deg, #000 12%, transparent 12.5%, transparent 87%, #000 87.5%, #000),
+                linear-gradient(60deg, #777 25%, transparent 25.5%, transparent 75%, #777 75%);
+            background-size: 80px 140px;
+        }
+
+        header {
+            padding: 45px 20px 25px;
+            text-align: center;
+            animation: showUp 1s ease both;
+        }
+
+        .logo-frame {
+            display: inline-block;
+            padding: 12px;
+            background: rgba(255,255,255,.4);
+            border: 4px solid var(--black);
+            border-radius: 28px;
+            box-shadow: 14px 14px 0 var(--black);
+        }
+
+        .logo-image {
+            display: block;
+            width: 440px;
+            max-width: 82vw;
+            height: auto;
+            border: 3px solid var(--black);
+            border-radius: 17px;
+            image-rendering: auto;
+        }
+
+        .brand-subtitle {
+            margin-top: 30px;
+            font-size: clamp(25px, 5vw, 42px);
+            font-weight: bold;
+            text-shadow: 2px 2px 0 rgba(255,255,255,.45);
+        }
+
+        .brand-subtitle span {
+            color: var(--red);
+        }
+
+        .intro-text {
+            max-width: 850px;
+            margin: 12px auto 0;
+            font-size: clamp(19px, 3vw, 26px);
+            font-weight: bold;
+        }
+
+        nav {
+            position: sticky;
+            top: 15px;
+            z-index: 100;
+            width: min(1150px, 94%);
+            margin: 25px auto 55px;
+            padding: 14px 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 9px;
+            background: rgba(0,0,0,.92);
+            border: 3px solid var(--black);
+            border-radius: 22px;
+            box-shadow: 0 8px 20px rgba(0,0,0,.3);
+            backdrop-filter: blur(12px);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 14px;
+            border-radius: 12px;
+            font-size: 23px;
+            font-weight: bold;
+            transition: .25s;
+        }
+
+        nav a:hover {
+            color: var(--black);
+            background: var(--orange);
+            transform: translateY(-3px);
+        }
+
+        .language-button {
+            padding: 7px 18px;
+            color: var(--black);
+            background: white;
+            border: 2px solid white;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .language-button:hover {
+            color: white;
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        main {
+            width: min(1150px, 92%);
+            margin: auto;
+        }
+
+        .section {
+            margin-bottom: 55px;
+            padding: 40px;
+            background: var(--glass);
+            border: 4px solid var(--black);
+            border-radius: 26px;
+            box-shadow: var(--shadow);
+            animation: showUp .8s ease both;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 14px 14px 0 var(--black);
+        }
+
+        .section-title {
+            display: inline-block;
+            margin-bottom: 24px;
+            padding: 0 18px 5px;
+            border-bottom: 5px solid var(--black);
+            font-size: clamp(30px, 5vw, 43px);
+            line-height: 1.5;
+        }
+
+        .section-description {
+            font-size: clamp(20px, 3vw, 27px);
+            text-align: justify;
+        }
+
+        /* محصولات */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 22px;
+            margin-top: 28px;
+        }
+
+        .product-card {
+            min-height: 190px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 22px 12px;
+            background: rgba(255,255,255,.42);
+            border: 3px solid var(--black);
+            border-radius: 18px;
+            box-shadow: 6px 6px 0 var(--black);
+            transition: .25s;
+        }
+
+        .product-card:hover {
+            color: white;
+            background: var(--black);
+            transform: translate(-4px, -4px);
+            box-shadow: 10px 10px 0 var(--red);
+        }
+
+        .product-icon {
+            font-size: 48px;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .product-card h3 {
+            font-size: 25px;
+            line-height: 1.5;
+        }
+
+        /* پروژه‌ها */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 28px;
+        }
+
+        .project-card {
+            overflow: hidden;
+            background: rgba(255,255,255,.4);
+            border: 3px solid var(--black);
+            border-radius: 20px;
+            box-shadow: 7px 7px 0 var(--black);
+        }
+
+        .project-card img {
+            display: block;
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            cursor: zoom-in;
+            transition: .35s;
+        }
+
+        .project-card img:hover {
+            transform: scale(1.07);
+        }
+
+        .project-card h3 {
+            padding: 12px;
+            font-size: 25px;
+        }
+
+        /* درباره ما */
+        .about-list {
+            margin: 22px 0 0;
+            padding-right: 30px;
+            text-align: right;
+            font-size: 24px;
+        }
+
+        .about-list li {
+            margin: 8px 0;
+        }
+
+        /* تماس */
+        .contact-box {
+            margin-top: 25px;
+            padding: 25px;
+            text-align: center;
+            background: rgba(255,255,255,.35);
+            border: 3px solid var(--black);
+            border-radius: 18px;
+        }
+
+        .phone {
+            display: inline-block;
+            margin: 15px 0;
+            color: var(--red);
+            font-size: 35px;
+            font-weight: bold;
+            direction: ltr;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-link {
+            min-width: 140px;
+            padding: 8px 20px;
+            color: white;
+            background: var(--black);
+            border: 3px solid var(--black);
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .social-link:hover {
+            color: var(--black);
+            background: var(--orange);
+        }
+
+        footer {
+            margin-top: 70px;
+            padding: 30px 15px;
+            text-align: center;
+            border-top: 4px solid var(--black);
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* نمایش بزرگ تصویر */
+        .image-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            background: rgba(0,0,0,.88);
+        }
+
+        .image-modal.show {
+            display: flex;
+        }
+
+        .image-modal img {
+            max-width: 95vw;
+            max-height: 90vh;
+            border: 5px solid white;
+            border-radius: 15px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            left: 25px;
+            color: white;
+            font-size: 45px;
+            cursor: pointer;
+        }
+
+        @keyframes showUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 650px) {
+            body {
+                padding: 12px;
+            }
+
+            nav {
+                top: 8px;
+                margin-bottom: 35px;
+            }
+
+            nav a {
+                font-size: 20px;
+                padding: 4px 8px;
+            }
+
+            .section {
+                padding: 25px 18px;
+                box-shadow: 7px 7px 0 var(--black);
+            }
+
+            .section:hover {
+                box-shadow: 9px 9px 0 var(--black);
+            }
+
+            .about-list {
+                padding-right: 22px;
+                font-size: 21px;
+            }
+
+            .project-card img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-pattern"></div>
+
+    <header>
+        <div class="logo-frame">
+            <img
+                src="photo29264407355.jpg"
+                alt="لوگوی شرکت لادیکا"
+                class="logo-image">
+        </div>
+
+        <h1 class="brand-subtitle" id="slogan">
+            <span>سبکی در ساخت</span>، استحکام در ماندگاری
+        </h1>
+
+        <p class="intro-text" id="introText">
+            تولیدکننده بلوک‌های سبک و غیر باربر سیمانی با کیفیت و استاندارد
+        </p>
+    </header>
+
+    <nav>
+        <a href="#products" id="menuProducts">محصولات</a>
+        <a href="#projects" id="menuProjects">پروژه‌ها</a>
+        <a href="#licenses" id="menuLicenses">مجوزها</a>
+        <a href="#about" id="menuAbout">درباره ما</a>
+        <a href="#contact" id="menuContact">تماس با ما</a>
+        <button class="language-button" onclick="toggleLanguage()" id="languageButton">
+            English
+        </button>
+    </nav>
+
+    <main>
+
+        <!-- محصولات -->
+        <section class="section" id="products">
+            <h2 class="section-title" id="productsTitle">محصولات لادیکا</h2>
+
+            <p class="section-description" id="productsDescription">
+                لادیکا با ارائه انواع بلوک‌های سبک سیمانی، پاسخ‌گوی نیاز پروژه‌های ساختمانی مختلف است.
+                محصولات ما برای ساخت دیوارهای داخلی و غیر باربر طراحی شده‌اند و به کاهش وزن ساختمان،
+                سرعت اجرای پروژه و بهبود عایق‌بندی کمک می‌کنند.
+         <!-- بخش محصولات اصلاح شده -->
+<section>
+    <div class="products-grid">
+        <!-- محصول ۱ -->
+        <div class="product-card" onclick="openModal('ladika10')">
+            <div class="product-icon">▦</div>
+            <h3>لادیکا ۱۰ دوجداره</h3>
+        </div>
+
+        <!-- محصول ۲ -->
+        <div class="product-card" onclick="openModal('ladika15_double')">
+            <div class="product-icon">▦</div>
+            <h3>لادیکا ۱۵ دوجداره</h3>
+        </div>
+
+        <!-- محصول ۳ -->
+        <div class="product-card" onclick="openModal('ladika15_triple')">
+            <div class="product-icon">▦</div>
+            <h3>لادیکا ۱۵ سه‌جداره</h3>
+        </div>
+
+        <!-- محصول ۴ -->
+        <div class="product-card" onclick="openModal('ladika15_quad')">
+            <div class="product-icon">▦</div>
+            <h3>لادیکا ۱۵ چهارجداره</h3>
+        </div>
+
+        <!-- محصول ۵ -->
+        <div class="product-card" onclick="openModal('ladika20_triple')">
+            <div class="product-icon">▦</div>
+            <h3>لادیکا ۲۰ سه‌جداره</h3>
+        </div>
+    </div>
+</section>
+
+<!-- ساختار پنجره بازشونده (حتماً این بخش را هم زیر محصولات اضافه کنید) -->
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div id="modal-body">
+            <!-- اطلاعات محصول اینجا نمایش داده می‌شود -->
+        </div>
+    </div>
+</div>
+
+<style>
+    /* استایل‌های لازم برای عملکرد صحیح */
+    .product-card { cursor: pointer; transition: 0.3s; }
+    .product-card:hover { transform: scale(1.05); }
+
+    /* استایل پنجره بازشونده */
+    .modal {
+        display: none; 
+        position: fixed; 
+        z-index: 9999; 
+        left: 0; top: 0; width: 100%; height: 100%; 
+        background-color: rgba(0,0,0,0.7);
+        backdrop-filter: blur(4px);
+    }
+    .modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 30px;
+        border-radius: 15px;
+        width: 80%;
+        max-width: 450px;
+        position: relative;
+        direction: rtl;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        animation: slideDown 0.4s ease-out;
+    }
+    @keyframes slideDown {
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    .close-btn {
+        position: absolute;
+        left: 15px; top: 10px;
+        font-size: 28px; cursor: pointer; color: #aaa;
+    }
+    .close-btn:hover { color: #000; }
+    #modal-body h2 { color: #333; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+    #modal-body p { font-size: 1.1em; line-height: 1.8; color: #555; }
+</style>
+
+<script>
+    // دیتابیس اطلاعات محصولات
+    const productData = {
+        'ladika10': {
+            title: 'لادیکا ۱۰ دوجداره',
+            info: '<b>کاربرد:</b> تیغه چینی داخلی ساختمان<br><b>وزن:</b> ۶٫۰۵ تا ۷٫۰۵ کیلوگرم<br><b>قیمت:</b> تماس با مدیر فروش'
+        },
+        'ladika15_double': {
+            title: 'لادیکا ۱۵ دوجداره',
+            info: '<b>کاربرد:</b> جداره‌های بیرونی (معتدل)<br><b>وزن:</b> ۷٫۰۵ تا ۸٫۰۵ کیلوگرم<br><b>قیمت:</b> تماس با مدیر فروش'
+        },
+        'ladika15_triple': {
+            title: 'لادیکا ۱۵ سه‌جداره',
+            info: '<b>کاربرد:</b> جداره‌های بیرونی (گرمسیر/سردسیر)<br><b>وزن:</b> ۹٫۰۵ تا ۱۰٫۰۵ کیلوگرم<br><b>قیمت:</b> تماس با مدیر فروش'
+        },
+        'ladika15_quad': {
+            title: 'لادیکا ۱۵ چهارجداره',
+            info: '<b>کاربرد:</b> جداره بیرونی و جداکننده (گرمسیر/سردسیر)<br><b>وزن:</b> ۱۱٫۰۵ تا ۱۲٫۰۵ کیلوگرم<br><b>قیمت:</b> تماس با مدیر فروش'
+        },
+        'ladika20_triple': {
+            title: 'لادیکا ۲۰ سه‌جداره',
+            info: '<b>کاربرد:</b> جداره بیرونی و جداکننده (واحدهای بهداشتی)<br><b>وزن:</b> ۱۲٫۰۵ تا ۱۳ کیلوگرم<br><b>قیمت:</b> تماس با مدیر فروش'
+        }
+    };
+
+    function openModal(id) {
+        const modal = document.getElementById('productModal');
+        const modalBody = document.getElementById('modal-body');
+        const product = productData[id];
+
+        if (product) {
+            modalBody.innerHTML = `<h2>${product.title}</h2><p>${product.info}</p>`;
+            modal.style.display = 'block';
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('productModal').style.display = 'none';
+    }
+
+    // بستن پنجره با کلیک روی فضای خالی بیرون از پنجره
+    window.onclick = function(event) {
+        const modal = document.getElementById('productModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
+
+
+        <!-- پروژه‌ها -->
+        <section class="section" id="projects">
+            <h2 class="section-title" id="projectsTitle">پروژه‌های لادیکا</h2>
+
+            <p class="section-description" id="projectsDescription">
+                بخشی از پروژه‌هایی که در آن‌ها از محصولات لادیکا استفاده شده است.
+                تصاویر پروژه‌های واقعی شما در این قسمت نمایش داده خواهند شد.
+            </p>
+
+            <div class="projects-grid">
+                <!-- پس از ارسال عکس‌ها، نام فایل‌ها را در src قرار دهید -->
+                <div class="project-card">
+                    <img src="project-1.jpg" alt="پروژه اول لادیکا" onclick="openImage(this.src)">
+                    <h3>پروژه اول لادیکا</h3>
+                </div>
+
+                <div class="project-card">
+                    <img src="project-2.jpg" alt="پروژه دوم لادیکا" onclick="openImage(this.src)">
+                    <h3>پروژه دوم لادیکا</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- مجوزها -->
+        <section class="section" id="licenses">
+            <h2 class="section-title" id="licensesTitle">استانداردها و مجوزها</h2>
+
+            <p class="section-description" id="licensesText">
+                محصولات لادیکا با توجه به نیاز صنعت ساختمان و با رعایت اصول تولید بلوک‌های سبک سیمانی
+                تولید می‌شوند. کیفیت مواد اولیه، دقت در تولید و کنترل کیفیت از اولویت‌های مجموعه لادیکا است.
+            </p>
+        </section>
+
+        <!-- درباره ما -->
+        <section class="section" id="about">
+            <h2 class="section-title" id="aboutTitle">درباره لادیکا</h2>
+
+            <p class="section-description" id="aboutText">
+                شرکت لادیکا فعالیت خود را از سال ۱۳۹۵ در شهر مشهد آغاز کرده است.
+                این مجموعه با هدف تولید بلوک‌های سبک و غیر باربر سیمانی، تلاش می‌کند محصولاتی
+                با کیفیت، کاربردی و مناسب برای پروژه‌های عمرانی و ساختمانی ارائه دهد.
+                لادیکا با تکیه بر تجربه، شناخت نیاز سازندگان و توجه به کیفیت تولید،
+                در مسیر توسعه صنعت ساختمان و کاهش وزن سازه‌ها فعالیت می‌کند.
+            </p>
+
+            <ul class="about-list">
+                <li id="aboutItem1">تولید بلوک‌های سبک و غیر باربر سیمانی</li>
+                <li id="aboutItem2">تمرکز بر کیفیت و دوام محصولات</li>
+                <li id="aboutItem3">مناسب برای دیوارهای داخلی و ساختمانی</li>
+                <li id="aboutItem4">ارائه محصولات متنوع برای پروژه‌های مختلف</li>
+                <li id="aboutItem5">فعالیت از سال ۱۳۹۵ در شهر مشهد</li>
+            </ul>
+        </section>
+
+        <!-- تماس -->
+        <section class="section" id="contact">
+            <h2 class="section-title" id="contactTitle">تماس با لادیکا</h2>
+
+            <p class="section-description" id="contactDescription">
+                برای دریافت مشاوره، اطلاع از قیمت محصولات و هماهنگی خرید با مدیر فروش لادیکا تماس بگیرید.
+            </p>
+
+            <div class="contact-box">
+                <strong id="salesManager">مدیر فروش</strong>
+
+                <a class="phone" href="tel:09204030400">
+                    09204030400
+                </a>
+
+                <div class="social-links">
+                    <a
+                        class="social-link"
+                        href="https://eitaa.com/ladikablock"
+                        target="_blank">
+                        ایتا
+                    </a>
+
+                    <a
+                        class="social-link"
+                        href="https://ble.ir/join/3aZ3a3Ss2m"
+                        target="_blank">
+                        بله
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p id="footerText">
+            © تمامی حقوق برای شرکت لادیکا محفوظ است.
+        </p>
+    </footer>
+
+    <!-- پنجره بزرگ‌نمایی تصاویر -->
+    <div class="image-modal" id="imageModal" onclick="closeImage()">
+        <span class="close-modal">&times;</span>
+        <img id="modalImage" src="" alt="تصویر بزرگ پروژه">
+    </div>
+
+    <script>
+        let isEnglish = false;
+
+        const translations = {
+            fa: {
+                menuProducts: "محصولات",
+                menuProjects: "پروژه‌ها",
+                menuLicenses: "مجوزها",
+                menuAbout: "درباره ما",
+                menuContact: "تماس با ما",
+                languageButton: "English",
+                slogan: '<span>سبکی در ساخت</span>، استحکام در ماندگاری',
+                introText: "تولیدکننده بلوک‌های سبک و غیر باربر سیمانی با کیفیت و استاندارد",
+                productsTitle: "محصولات لادیکا",
+                productsDescription: "لادیکا با ارائه انواع بلوک‌های سبک سیمانی، پاسخ‌گوی نیاز پروژه‌های ساختمانی مختلف است. محصولات ما برای ساخت دیوارهای داخلی و غیر باربر طراحی شده‌اند و به کاهش وزن ساختمان، سرعت اجرای پروژه و بهبود عایق‌بندی کمک می‌کنند.",
+                projectsTitle: "پروژه‌های لادیکا",
+                projectsDescription: "بخشی از پروژه‌هایی که در آن‌ها از محصولات لادیکا استفاده شده است. تصاویر پروژه‌های واقعی شما در این قسمت نمایش داده خواهند شد.",
+                licensesTitle: "استانداردها و مجوزها",
+                licensesText: "محصولات لادیکا با توجه به نیاز صنعت ساختمان و با رعایت اصول تولید بلوک‌های سبک سیمانی تولید می‌شوند. کیفیت مواد اولیه، دقت در تولید و کنترل کیفیت از اولویت‌های مجموعه لادیکا است.",
+                aboutTitle: "درباره لادیکا",
+                aboutText: "شرکت لادیکا فعالیت خود را از سال ۱۳۹۵ در شهر مشهد آغاز کرده است. این مجموعه با هدف تولید بلوک‌های سبک و غیر باربر سیمانی، تلاش می‌کند محصولاتی با کیفیت، کاربردی و مناسب برای پروژه‌های عمرانی و ساختمانی ارائه دهد. لادیکا با تکیه بر تجربه، شناخت نیاز سازندگان و توجه به کیفیت تولید، در مسیر توسعه صنعت ساختمان و کاهش وزن سازه‌ها فعالیت می‌کند.",
+                aboutItem1: "تولید بلوک‌های سبک و غیر باربر سیمانی",
+                aboutItem2: "تمرکز بر کیفیت و دوام محصولات",
+                aboutItem3: "مناسب برای دیوارهای داخلی و ساختمانی",
+                aboutItem4: "ارائه محصولات متنوع برای پروژه‌های مختلف",
+                aboutItem5: "فعالیت از سال ۱۳۹۵ در شهر مشهد",
+                contactTitle: "تماس با لادیکا",
+                contactDescription: "برای دریافت مشاوره، اطلاع از قیمت محصولات و هماهنگی خرید با مدیر فروش لادیکا تماس بگیرید.",
+                salesManager: "مدیر فروش",
+                footerText: "© تمامی حقوق برای شرکت لادیکا محفوظ است."
+            },
+
+            en: {
+                menuProducts: "Products",
+                menuProjects: "Projects",
+                menuLicenses: "Licenses",
+                menuAbout: "About Us",
+                menuContact: "Contact Us",
+                languageButton: "فارسی",
+                slogan: '<span>Lightness in Construction</span>, Strength in Durability',
+                introText: "Producer of high-quality lightweight and non-load-bearing concrete blocks",
+                productsTitle: "LADIKA Products",
+                productsDescription: "LADIKA provides a variety of lightweight concrete blocks for different construction projects. Our products are designed for internal and non-load-bearing walls, helping reduce building weight, improve construction speed and enhance insulation.",
+                projectsTitle: "LADIKA Projects",
+                projectsDescription: "Some of the projects where LADIKA products have been used. Photos of your real projects will be displayed here.",
+                licensesTitle: "Standards and Licenses",
+                licensesText: "LADIKA products are manufactured according to construction industry requirements and lightweight concrete block production principles. Material quality, production accuracy and quality control are among our priorities.",
+                aboutTitle: "About LADIKA",
+                aboutText: "LADIKA started its activities in 2016 in Mashhad. The company focuses on producing lightweight and non-load-bearing concrete blocks and aims to provide high-quality and practical products for construction and civil engineering projects. By relying on experience, understanding builders’ needs and focusing on production quality, LADIKA works toward improving the construction industry and reducing structural weight.",
+                aboutItem1: "Production of lightweight and non-load-bearing concrete blocks",
+                aboutItem2: "Focus on product quality and durability",
+                aboutItem3: "Suitable for internal and construction walls",
+                aboutItem4: "Various products for different projects",
+                aboutItem5: "Active since 2016 in Mashhad",
+                contactTitle: "Contact LADIKA",
+                contactDescription: "Contact LADIKA’s sales manager for consultation, product prices and purchase coordination.",
+                salesManager: "Sales Manager",
+                footerText: "© All rights reserved by LADIKA Company."
+            }
+        };
+
+        function setText(id, text, html = false) {
+            const element = document.getElementById(id);
+
+            if (!element) return;
+
+            if (html) {
+                element.innerHTML = text;
+            } else {
+                element.textContent = text;
+            }
+        }
+
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+
+            const language = isEnglish ? "en" : "fa";
+            const direction = isEnglish ? "ltr" : "rtl";
+            const text = translations[language];
+
+            document.documentElement.lang = language;
+            document.documentElement.dir = direction;
+
+            setText("menuProducts", text.menuProducts);
+            setText("menuProjects", text.menuProjects);
+            setText("menuLicenses", text.menuLicenses);
+            setText("menuAbout", text.menuAbout);
+            setText("menuContact", text.menuContact);
+            setText("languageButton", text.languageButton);
+
+            setText("slogan", text.slogan, true);
+            setText("introText", text.introText);
+
+            setText("productsTitle", text.productsTitle);
+            setText("productsDescription", text.productsDescription);
+
+            setText("projectsTitle", text.projectsTitle);
+            setText("projectsDescription", text.projectsDescription);
+
+            setText("licensesTitle", text.licensesTitle);
+            setText("licensesText", text.licensesText);
+
+            setText("aboutTitle", text.aboutTitle);
+            setText("aboutText", text.aboutText);
+            setText("aboutItem1", text.aboutItem1);
+            setText("aboutItem2", text.aboutItem2);
+            setText("aboutItem3", text.aboutItem3);
+            setText("aboutItem4", text.aboutItem4);
+            setText("aboutItem5", text.aboutItem5);
+
+            setText("contactTitle", text.contactTitle);
+            setText("contactDescription", text.contactDescription);
+            setText("salesManager", text.salesManager);
+            setText("footerText", text.footerText);
+        }
+
+        function openImage(imageSource) {
+            document.getElementById("modalImage").src = imageSource;
+            document.getElementById("imageModal").classList.add("show");
+        }
+
+        function closeImage() {
+            document.getElementById("imageModal").classList.remove("show");
+        }
+
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                closeImage();
+            }
+        });
+    </script>
+
+</body>
+</html>
